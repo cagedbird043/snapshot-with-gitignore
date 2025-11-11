@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(__dirname, 'src'),
       },
     },
 
@@ -36,6 +36,23 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom'],
           },
         },
+      },
+    },
+
+    test: {
+      environment: 'node',
+      globals: true,
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'json', 'html'],
+        exclude: [
+          'node_modules/',
+          'dist/',
+          '**/*.d.ts',
+          '**/*.config.*',
+          '**/main.tsx',
+          '**/__tests__/**',
+        ],
       },
     },
   };
