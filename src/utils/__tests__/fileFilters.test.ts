@@ -44,11 +44,16 @@ describe('fileFilters', () => {
   });
 
   describe('isFileAllowed', () => {
+    // 创建模拟的 File 对象（兼容 Node.js 环境）
     const createMockFile = (path: string, size: number, name: string): File => {
-      const file = new File([''], name, { type: 'text/plain' });
-      Object.defineProperty(file, 'webkitRelativePath', { value: path });
-      Object.defineProperty(file, 'size', { value: size });
-      return file;
+      // 在 Node.js 环境中，使用简单的对象模拟 File
+      const mockFile = {
+        name,
+        size,
+        webkitRelativePath: path,
+        type: 'text/plain',
+      } as File;
+      return mockFile;
     };
 
     it('rejects files larger than MAX_FILE_SIZE', () => {
