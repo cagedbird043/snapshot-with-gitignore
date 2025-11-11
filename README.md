@@ -11,6 +11,8 @@
 
 _An intelligent project code snapshot generator, optimized for AI conversations_
 
+**[🚀 在线试用 / Try it Online](https://cagedbird043.github.io/snapshot-with-gitignore/)**
+
 [English](#english) | [中文](#chinese)
 
 </div>
@@ -47,12 +49,20 @@ _An intelligent project code snapshot generator, optimized for AI conversations_
 
 ### 📦 快速开始
 
-#### 前置要求
+#### 在线使用
 
-- Node.js 16+
+**🌐 直接访问**: [https://cagedbird043.github.io/snapshot-with-gitignore/](https://cagedbird043.github.io/snapshot-with-gitignore/)
+
+无需安装，打开浏览器即可使用！
+
+#### 本地开发
+
+**前置要求**
+
+- Node.js 18+
 - npm 或 yarn
 
-#### 安装步骤
+**安装步骤**
 
 ```bash
 # 克隆仓库
@@ -78,24 +88,20 @@ npm run preview
 ### 🎮 使用方法
 
 1. **选择项目文件夹**：
-
    - 点击 "Select Project Folder" 按钮，或
    - 直接拖放项目文件夹到应用窗口
 
 2. **查看过滤结果**：
-
    - 应用会自动加载 `.gitignore` 规则
    - 显示将被包含的文件列表
    - 实时显示文件数量和大小统计
 
 3. **调整规则（可选）**：
-
    - 在文本框中编辑 gitignore 规则
    - 支持标准 gitignore 语法
    - 修改后自动重新过滤
 
 4. **生成快照**：
-
    - 点击 "Generate Snapshot" 按钮
    - 等待后台处理完成
    - 查看生成的预览
@@ -109,27 +115,25 @@ npm run preview
 
 生成的快照包含：
 
-```markdown
+````markdown
 # Project Snapshot: your-project-name
 
 ## Project Structure
-```
 
+```
 .
 ├── src/
-│ ├── components/
-│ │ └── App.tsx
-│ └── utils/
+│   ├── components/
+│   │   └── App.tsx
+│   └── utils/
 └── package.json
-
-````
+```
 
 ## File Contents
 
 ```typescript:src/components/App.tsx
 // 完整的文件内容...
-````
-
+```
 ````
 
 ### 🛠️ 技术栈
@@ -143,16 +147,19 @@ npm run preview
 ### 🎨 默认过滤规则
 
 #### 目录
+
 - `.git`, `.vscode`, `.idea`
 - `node_modules`, `build`, `dist`, `target`
 - `.venv`, `debug`, `release`
 
 #### 文件
+
 - `package-lock.json`, `yarn.lock`
 - 所有二进制文件（图片、视频、音频）
 - 编译产物（`.exe`, `.dll`, `.so`, `.o`, 等）
 
 #### 大小限制
+
 - 单个文件最大 1MB
 
 ### 🤝 贡献指南
@@ -204,12 +211,20 @@ When you need to show your entire project code to an AI assistant, manual copy-p
 
 ### 📦 Quick Start
 
-#### Prerequisites
+#### Online Use
 
-- Node.js 16+
+**🌐 Try it now**: [https://cagedbird043.github.io/snapshot-with-gitignore/](https://cagedbird043.github.io/snapshot-with-gitignore/)
+
+No installation required, just open in your browser!
+
+#### Local Development
+
+**Prerequisites**
+
+- Node.js 18+
 - npm or yarn
 
-#### Installation
+**Installation**
 
 ```bash
 # Clone the repository
@@ -221,7 +236,7 @@ npm install
 
 # Start development server
 npm run dev
-````
+```
 
 The app will open at `http://localhost:3000`.
 
@@ -235,24 +250,20 @@ npm run preview
 ### 🎮 Usage
 
 1. **Select Project Folder**:
-
    - Click "Select Project Folder" button, or
    - Drag and drop project folder into the app window
 
 2. **Review Filtering Results**:
-
    - App automatically loads `.gitignore` rules
    - Displays list of files to be included
    - Shows real-time file count and size statistics
 
 3. **Adjust Rules (Optional)**:
-
    - Edit gitignore rules in the text box
    - Supports standard gitignore syntax
    - Auto-refilters after modifications
 
 4. **Generate Snapshot**:
-
    - Click "Generate Snapshot" button
    - Wait for background processing to complete
    - Review the generated preview
@@ -266,28 +277,26 @@ npm run preview
 
 Generated snapshots contain:
 
-```markdown
+````markdown
 # Project Snapshot: your-project-name
 
 ## Project Structure
-```
 
+```
 .
 ├── src/
-│ ├── components/
-│ │ └── App.tsx
-│ └── utils/
+│   ├── components/
+│   │   └── App.tsx
+│   └── utils/
 └── package.json
-
-````
+```
 
 ## File Contents
 
 ```typescript:src/components/App.tsx
 // Complete file contents...
-````
-
 ```
+````
 
 ### 🛠️ Tech Stack
 
@@ -300,16 +309,19 @@ Generated snapshots contain:
 ### 🎨 Default Filter Rules
 
 #### Directories
+
 - `.git`, `.vscode`, `.idea`
 - `node_modules`, `build`, `dist`, `target`
 - `.venv`, `debug`, `release`
 
 #### Files
+
 - `package-lock.json`, `yarn.lock`
 - All binary files (images, videos, audio)
 - Compiled artifacts (`.exe`, `.dll`, `.so`, `.o`, etc.)
 
 #### Size Limit
+
 - Maximum 1MB per file
 
 ### 🤝 Contributing
@@ -334,6 +346,8 @@ This project was generated through conversations with Google AI Studio, serving 
 <div align="center">
 
 **Made with ❤️ and AI**
+
+**[🚀 Try it Online](https://cagedbird043.github.io/snapshot-with-gitignore/)** | **[⭐ Star on GitHub](https://github.com/cagedbird043/snapshot-with-gitignore)**
 
 If this project helps you, please give it a ⭐️!
 
