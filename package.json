@@ -1,12 +1,42 @@
 {
   "name": "snapshot-with-gitignore",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "An intelligent project code snapshot generator that respects .gitignore rules, optimized for AI conversations",
   "type": "module",
+  "keywords": [
+    "snapshot",
+    "gitignore",
+    "code-snapshot",
+    "ai-tools",
+    "project-analyzer",
+    "react",
+    "typescript",
+    "vite",
+    "developer-tools",
+    "productivity"
+  ],
+  "author": {
+    "name": "cagedbird043",
+    "url": "https://github.com/cagedbird043"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cagedbird043/snapshot-with-gitignore.git"
+  },
+  "homepage": "https://github.com/cagedbird043/snapshot-with-gitignore#readme",
+  "bugs": {
+    "url": "https://github.com/cagedbird043/snapshot-with-gitignore/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,css,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,css,md,json}\""
   },
   "dependencies": {
     "@google/genai": "^0.7.0",
@@ -15,8 +45,20 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
   }
 }

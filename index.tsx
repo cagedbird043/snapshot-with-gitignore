@@ -1,20 +1,43 @@
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
+ * 
+ * Snapshot With Gitignore
+ * An intelligent project code snapshot generator that respects .gitignore rules
+ * 
+ * 一个智能的项目代码快照生成器，遵循 .gitignore 规则
+ * 
+ * @author cagedbird043
+ * @repository https://github.com/cagedbird043/snapshot-with-gitignore
 */
 import React, {useState, ChangeEvent, useEffect, useRef, DragEvent} from 'react';
 import ReactDOM from 'react-dom/client';
 
-// --- Configuration for file filtering ---
+// ========================================
+// Configuration for file filtering
+// 文件过滤配置
+// ========================================
 
+/**
+ * Common directories to ignore during scanning
+ * 扫描时需要忽略的常见目录
+ */
 const IGNORED_DIRECTORIES = new Set([
   '.git', 'target', 'build', 'node_modules', '.vscode', '.idea', 'debug', 'release', '.venv'
 ]);
 
+/**
+ * Specific files to ignore (usually lock files)
+ * 需要忽略的特定文件（通常是锁文件）
+ */
 const IGNORED_FILES = new Set([
   'package-lock.json', 'yarn.lock'
 ]);
 
+/**
+ * Binary file extensions to skip (images, videos, executables, etc.)
+ * 需要跳过的二进制文件扩展名（图片、视频、可执行文件等）
+ */
 const IGNORED_BINARY_EXTENSIONS = new Set([
   'png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'webp', 'svg',
   'mp3', 'wav', 'ogg', 'mp4', 'mov', 'webm',
@@ -24,10 +47,25 @@ const IGNORED_BINARY_EXTENSIONS = new Set([
   'pdb', 'ds_store'
 ]);
 
-const MAX_FILE_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
+/**
+ * Maximum file size to process (1MB)
+ * 最大处理文件大小（1MB）
+ */
+const MAX_FILE_SIZE_BYTES = 1 * 1024 * 1024;
 
-// --- Helper functions for filtering (will be stringified for Web Worker) ---
+// ========================================
+// Helper functions for filtering (will be stringified for Web Worker)
+// 过滤辅助函数（将被序列化为 Web Worker 代码）
+// ========================================
 
+/**
+ * Check if a file should be ignored based on gitignore rules
+ * 根据 gitignore 规则检查文件是否应该被忽略
+ * 
+ * @param relativePath - File path relative to project root / 相对于项目根目录的文件路径
+ * @param gitignoreContent - Content of .gitignore file / .gitignore 文件内容
+ * @returns true if file should be ignored / 如果文件应该被忽略则返回 true
+ */
 function isFileIgnoredByGitignore(relativePath: string, gitignoreContent: string): boolean {
     const patterns = gitignoreContent
         .split('\n')
@@ -69,12 +107,27 @@ function isFileIgnoredByGitignore(relativePath: string, gitignoreContent: string
     return false;
 }
 
+/**
+ * Interface for gitignore file metadata
+ * gitignore 文件元数据接口
+ */
 interface GitignoreFile {
     path: string;
     content: string;
 }
 
-// NOTE: This function and its dependencies will be executed inside a Web Worker.
+/**
+ * Main filtering function - determines if a file should be included in snapshot
+ * 主过滤函数 - 决定文件是否应该包含在快照中
+ * 
+ * NOTE: This function and its dependencies will be executed inside a Web Worker.
+ * 注意：此函数及其依赖项将在 Web Worker 中执行。
+ * 
+ * @param file - The file to check / 要检查的文件
+ * @param gitignores - Array of gitignore files / gitignore 文件数组
+ * @param projectName - Name of the project / 项目名称
+ * @returns true if file should be included / 如果文件应该包含则返回 true
+ */
 function isFileAllowed(
     file: File, 
     gitignores: GitignoreFile[],

@@ -1,0 +1,11 @@
+# Ignore build outputs
+dist
+build
+coverage
+
+# Ignore dependencies
+node_modules
+
+# Ignore config files
+.vscode
+.idea
