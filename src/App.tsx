@@ -34,16 +34,14 @@ export const App = () => {
     [processFiles]
   );
 
-  const handleDragOver = useCallback(
-    (event: DragEvent<HTMLElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (!isDragging) {
-        setIsDragging(true);
-      }
-    },
-    [isDragging]
-  );
+  const handleDragOver = useCallback((event: DragEvent<HTMLElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(prev => {
+      if (prev) return prev;
+      return true;
+    });
+  }, []);
 
   const handleDragLeave = useCallback((event: DragEvent<HTMLElement>) => {
     event.preventDefault();

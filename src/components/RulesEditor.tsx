@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { GitignoreFile } from '../types';
 import styles from './RulesEditor.module.css';
 
@@ -7,7 +8,7 @@ interface RulesEditorProps {
   onChange: (path: string, content: string) => void;
 }
 
-export const RulesEditor = ({ rules, isDisabled, onChange }: RulesEditorProps) => (
+const RulesEditorComponent = ({ rules, isDisabled, onChange }: RulesEditorProps) => (
   <section className={styles.settingsPanel}>
     {rules.map((gitignore, index) => (
       <div className={styles.formGroup} key={gitignore.path}>
@@ -27,3 +28,6 @@ export const RulesEditor = ({ rules, isDisabled, onChange }: RulesEditorProps) =
     ))}
   </section>
 );
+
+// 使用 memo 避免不必要的重新渲染
+export const RulesEditor = memo(RulesEditorComponent);

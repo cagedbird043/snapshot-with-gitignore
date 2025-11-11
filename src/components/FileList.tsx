@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { FilteredFile } from '../types';
 import { formatFileSize } from '../utils/fileInfo';
 import styles from './FileList.module.css';
@@ -8,7 +9,7 @@ interface FileListProps {
 
 const MAX_VISIBLE_FILES = 200;
 
-export const FileList = ({ files }: FileListProps) => {
+const FileListComponent = ({ files }: FileListProps) => {
   if (!files.length) {
     return null;
   }
@@ -33,3 +34,6 @@ export const FileList = ({ files }: FileListProps) => {
     </section>
   );
 };
+
+// 使用 memo 避免不必要的重新渲染
+export const FileList = memo(FileListComponent);
