@@ -1,6 +1,6 @@
 {
   "name": "snapshot-with-gitignore",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An intelligent project code snapshot generator that respects .gitignore rules, optimized for AI conversations",
   "type": "module",
   "keywords": [
