@@ -6,11 +6,11 @@ import './globals.css';
 const mountNode = document.getElementById('root');
 
 if (!mountNode) {
-  throw new Error('Failed to find the root element to mount the React app.');
+    throw new Error('Failed to find the root element to mount the React app.');
 }
 
 createRoot(mountNode).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+    <StrictMode>
+        <App />
+    </StrictMode>
 );

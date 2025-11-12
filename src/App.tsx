@@ -11,97 +11,97 @@ import { extractFilesFromDataTransferItems } from './utils/dnd';
 import styles from './App.module.css';
 
 export const App = () => {
-  const {
-    status,
-    gitignores,
-    filteredFiles,
-    snapshotContent,
-    isLoading,
-    canGenerateSnapshot,
-    processFiles,
-    updateGitignore,
-    generateSnapshot,
-    downloadSnapshot,
-    copySnapshotToClipboard,
-  } = useFileProcessor();
+    const {
+        status,
+        gitignores,
+        filteredFiles,
+        snapshotContent,
+        isLoading,
+        canGenerateSnapshot,
+        processFiles,
+        updateGitignore,
+        generateSnapshot,
+        downloadSnapshot,
+        copySnapshotToClipboard,
+    } = useFileProcessor();
 
-  const [isDragging, setIsDragging] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
-  const handleFolderSelect = useCallback(
-    (files: File[]) => {
-      processFiles(files);
-    },
-    [processFiles]
-  );
+    const handleFolderSelect = useCallback(
+        (files: File[]) => {
+            processFiles(files);
+        },
+        [processFiles]
+    );
 
-  const handleDragOver = useCallback((event: DragEvent<HTMLElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsDragging(prev => {
-      if (prev) return prev;
-      return true;
-    });
-  }, []);
+    const handleDragOver = useCallback((event: DragEvent<HTMLElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setIsDragging(prev => {
+            if (prev) return prev;
+            return true;
+        });
+    }, []);
 
-  const handleDragLeave = useCallback((event: DragEvent<HTMLElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    const handleDragLeave = useCallback((event: DragEvent<HTMLElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-    if (event.currentTarget === event.target) {
-      setIsDragging(false);
-    }
-  }, []);
+        if (event.currentTarget === event.target) {
+            setIsDragging(false);
+        }
+    }, []);
 
-  const handleDrop = useCallback(
-    async (event: DragEvent<HTMLElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-      setIsDragging(false);
+    const handleDrop = useCallback(
+        async (event: DragEvent<HTMLElement>) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setIsDragging(false);
 
-      if (!event.dataTransfer?.items) {
-        return;
-      }
+            if (!event.dataTransfer?.items) {
+                return;
+            }
 
-      const droppedFiles = await extractFilesFromDataTransferItems(event.dataTransfer.items);
-      if (droppedFiles.length) {
-        processFiles(droppedFiles);
-      }
-    },
-    [processFiles]
-  );
+            const droppedFiles = await extractFilesFromDataTransferItems(event.dataTransfer.items);
+            if (droppedFiles.length) {
+                processFiles(droppedFiles);
+            }
+        },
+        [processFiles]
+    );
 
-  return (
-    <main
-      className={`${styles.container} ${isDragging ? styles.dragging : ''}`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
-      <DragDropOverlay isDragging={isDragging} />
+    return (
+        <main
+            className={`${styles.container} ${isDragging ? styles.dragging : ''}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+        >
+            <DragDropOverlay isDragging={isDragging} />
 
-      <Header
-        title="Project Code Snapshotter"
-        description="Upload or drop a project folder to generate a single text file of its source code."
-      />
+            <Header
+                title="Project Code Snapshotter"
+                description="Upload or drop a project folder to generate a single text file of its source code."
+            />
 
-      <Controls
-        isProcessing={isLoading}
-        canGenerate={canGenerateSnapshot}
-        onFolderSelect={handleFolderSelect}
-        onGenerateSnapshot={generateSnapshot}
-      />
+            <Controls
+                isProcessing={isLoading}
+                canGenerate={canGenerateSnapshot}
+                onFolderSelect={handleFolderSelect}
+                onGenerateSnapshot={generateSnapshot}
+            />
 
-      <RulesEditor rules={gitignores} isDisabled={isLoading} onChange={updateGitignore} />
+            <RulesEditor rules={gitignores} isDisabled={isLoading} onChange={updateGitignore} />
 
-      <StatusBar status={status} />
+            <StatusBar status={status} />
 
-      <FileList files={filteredFiles} />
+            <FileList files={filteredFiles} />
 
-      <SnapshotPreview
-        content={snapshotContent}
-        onCopy={copySnapshotToClipboard}
-        onDownload={downloadSnapshot}
-      />
-    </main>
-  );
+            <SnapshotPreview
+                content={snapshotContent}
+                onCopy={copySnapshotToClipboard}
+                onDownload={downloadSnapshot}
+            />
+        </main>
+    );
 };

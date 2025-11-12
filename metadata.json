@@ -1,5 +1,5 @@
 {
-  "name": "SnapShot-With-Gitignore",
-  "description": "Example React app using Gemini",
-  "requestFramePermissions": []
+    "name": "SnapShot-With-Gitignore",
+    "description": "Example React app using Gemini",
+    "requestFramePermissions": []
 }

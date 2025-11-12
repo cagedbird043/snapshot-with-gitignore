@@ -7,19 +7,19 @@ It's people like you that make this tool better for everyone.
 ## 📋 Table of Contents
 
 - [Contributing to Snapshot With Gitignore](#contributing-to-snapshot-with-gitignore)
-  - [📋 Table of Contents](#-table-of-contents)
-  - [Code of Conduct](#code-of-conduct)
-  - [How Can I Contribute?](#how-can-i-contribute)
-    - [Reporting Bugs](#reporting-bugs)
-    - [Suggesting Enhancements](#suggesting-enhancements)
-    - [Pull Requests](#pull-requests)
-  - [Development Setup](#development-setup)
-  - [Style Guidelines](#style-guidelines)
-    - [Git Commit Messages](#git-commit-messages)
-    - [TypeScript Style Guide](#typescript-style-guide)
-    - [CSS Style Guide](#css-style-guide)
-  - [Project Structure](#project-structure)
-  - [Questions?](#questions)
+    - [📋 Table of Contents](#-table-of-contents)
+    - [Code of Conduct](#code-of-conduct)
+    - [How Can I Contribute?](#how-can-i-contribute)
+        - [Reporting Bugs](#reporting-bugs)
+        - [Suggesting Enhancements](#suggesting-enhancements)
+        - [Pull Requests](#pull-requests)
+    - [Development Setup](#development-setup)
+    - [Style Guidelines](#style-guidelines)
+        - [Git Commit Messages](#git-commit-messages)
+        - [TypeScript Style Guide](#typescript-style-guide)
+        - [CSS Style Guide](#css-style-guide)
+    - [Project Structure](#project-structure)
+    - [Questions?](#questions)
 
 ## Code of Conduct
 
@@ -62,46 +62,46 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/cagedbird043/snapshot-with-gitignore.git
-   cd snapshot-with-gitignore
-   ```
+    ```bash
+    git clone https://github.com/cagedbird043/snapshot-with-gitignore.git
+    cd snapshot-with-gitignore
+    ```
 
 2. **Install dependencies**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 3. **Set up pre-commit hooks**
 
-   This project uses [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged) to run linting and formatting on staged files before each commit.
+    This project uses [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged) to run linting and formatting on staged files before each commit.
 
-   ```bash
-   npm run prepare
-   ```
+    ```bash
+    npm run prepare
+    ```
 
-   This will set up the pre-commit hooks that automatically:
-   - Run ESLint and fix issues on TypeScript/TSX files
-   - Format code with Prettier on all supported file types
-   - Prevent commits if there are unfixable linting errors
+    This will set up the pre-commit hooks that automatically:
+    - Run ESLint and fix issues on TypeScript/TSX files
+    - Format code with Prettier on all supported file types
+    - Prevent commits if there are unfixable linting errors
 
 4. **Start the development server**
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
 5. **Build for production**
 
-   ```bash
-   npm run build
-   ```
+    ```bash
+    npm run build
+    ```
 
 6. **Run type checking**
-   ```bash
-   npm run type-check
-   ```
+    ```bash
+    npm run type-check
+    ```
 
 ## Style Guidelines
 
@@ -112,15 +112,15 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 - Limit the first line to 72 characters or less
 - Reference issues and pull requests liberally after the first line
 - Consider starting the commit message with an applicable emoji:
-  - 🎨 `:art:` when improving the format/structure of the code
-  - 🐎 `:racehorse:` when improving performance
-  - 📝 `:memo:` when writing docs
-  - 🐛 `:bug:` when fixing a bug
-  - 🔥 `:fire:` when removing code or files
-  - ✅ `:white_check_mark:` when adding tests
-  - 🔒 `:lock:` when dealing with security
-  - ⬆️ `:arrow_up:` when upgrading dependencies
-  - ⬇️ `:arrow_down:` when downgrading dependencies
+    - 🎨 `:art:` when improving the format/structure of the code
+    - 🐎 `:racehorse:` when improving performance
+    - 📝 `:memo:` when writing docs
+    - 🐛 `:bug:` when fixing a bug
+    - 🔥 `:fire:` when removing code or files
+    - ✅ `:white_check_mark:` when adding tests
+    - 🔒 `:lock:` when dealing with security
+    - ⬆️ `:arrow_up:` when upgrading dependencies
+    - ⬇️ `:arrow_down:` when downgrading dependencies
 
 ### TypeScript Style Guide
 
@@ -137,15 +137,15 @@ Example:
 
 ```typescript
 interface FileMetadata {
-  path: string;
-  size: number;
+    path: string;
+    size: number;
 }
 
 function processFiles(files: File[]): FileMetadata[] {
-  return files.map(file => ({
-    path: file.webkitRelativePath,
-    size: file.size,
-  }));
+    return files.map(file => ({
+        path: file.webkitRelativePath,
+        size: file.size,
+    }));
 }
 ```
 
@@ -163,17 +163,17 @@ Example:
 ```css
 /* Component: File List */
 .file-list {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .file-list__item {
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .file-list__item--selected {
-  background-color: var(--primary-color);
+    background-color: var(--primary-color);
 }
 ```
 

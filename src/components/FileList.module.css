@@ -1,51 +1,51 @@
 .container {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 .container h2 {
-  font-size: 1.25rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .fileList {
-  list-style: none;
-  padding: 0.5rem;
-  margin: 0;
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background-color: #ffffff;
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: #ffffff;
 }
 
 .fileList li {
-  padding: 0.5rem 1rem;
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #e9ecef;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    padding: 0.5rem 1rem;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e9ecef;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .fileList li:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .fileSize {
-  display: inline-block;
-  width: 70px;
-  text-align: right;
-  margin-right: 1rem;
-  color: var(--secondary-color);
-  font-size: 0.85rem;
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+    margin-right: 1rem;
+    color: var(--secondary-color);
+    font-size: 0.85rem;
 }
 
 .moreFiles {
-  font-style: italic;
-  color: var(--secondary-color);
-  text-align: center;
-  padding: 0.75rem 1rem;
+    font-style: italic;
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 0.75rem 1rem;
 }

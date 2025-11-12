@@ -26,31 +26,31 @@
 **Enhanced User Experience**
 
 ### Planned Features
+
 - [ ] **Dark/Light Theme Toggle**
-  - User preference persistence
-  - System theme detection
-  
+    - User preference persistence
+    - System theme detection
 - [ ] **Statistics Dashboard**
-  - Total lines of code
-  - Language breakdown
-  - File type distribution
-  - Project complexity metrics
+    - Total lines of code
+    - Language breakdown
+    - File type distribution
+    - Project complexity metrics
 
 - [ ] **Search and Filter**
-  - Search files before generation
-  - Filter by file extension
-  - Preview individual files
+    - Search files before generation
+    - Filter by file extension
+    - Preview individual files
 
 - [ ] **Export Formats**
-  - JSON export
-  - YAML export
-  - Plain text export
-  - HTML export with syntax highlighting
+    - JSON export
+    - YAML export
+    - Plain text export
+    - HTML export with syntax highlighting
 
 - [ ] **History**
-  - Save recent snapshots
-  - Quick re-generation
-  - Compare snapshots
+    - Save recent snapshots
+    - Quick re-generation
+    - Compare snapshots
 
 ---
 
@@ -59,30 +59,31 @@
 **Advanced Features**
 
 ### Planned Features
+
 - [ ] **CLI Version**
-  - Command-line tool for automation
-  - Integration with CI/CD pipelines
-  - Batch processing
+    - Command-line tool for automation
+    - Integration with CI/CD pipelines
+    - Batch processing
 
 - [ ] **VS Code Extension**
-  - Right-click context menu
-  - Command palette integration
-  - In-editor preview
+    - Right-click context menu
+    - Command palette integration
+    - In-editor preview
 
 - [ ] **Browser Extension**
-  - Quick access from any page
-  - GitHub integration
-  - GitLab integration
+    - Quick access from any page
+    - GitHub integration
+    - GitLab integration
 
 - [ ] **Custom Templates**
-  - Save filter presets
-  - Share templates with team
-  - Import/export templates
+    - Save filter presets
+    - Share templates with team
+    - Import/export templates
 
 - [ ] **File Compression**
-  - Minify output
-  - Remove comments option
-  - Code simplification
+    - Minify output
+    - Remove comments option
+    - Code simplification
 
 ---
 
@@ -91,26 +92,27 @@
 **AI Integration**
 
 ### Planned Features
+
 - [ ] **Direct AI Integration**
-  - Send to ChatGPT directly
-  - Claude integration
-  - Gemini integration
-  - Custom API endpoints
+    - Send to ChatGPT directly
+    - Claude integration
+    - Gemini integration
+    - Custom API endpoints
 
 - [ ] **Smart Suggestions**
-  - AI-powered file recommendations
-  - Automatic ignore rule suggestions
-  - Project type detection
+    - AI-powered file recommendations
+    - Automatic ignore rule suggestions
+    - Project type detection
 
 - [ ] **Code Analysis**
-  - Vulnerability scanning
-  - Dependency analysis
-  - License compatibility check
+    - Vulnerability scanning
+    - Dependency analysis
+    - License compatibility check
 
 - [ ] **Documentation Generation**
-  - Auto-generate README
-  - API documentation
-  - Architecture diagrams
+    - Auto-generate README
+    - API documentation
+    - Architecture diagrams
 
 ---
 
@@ -119,37 +121,39 @@
 **Major Overhaul**
 
 ### Planned Features
+
 - [ ] **Multi-Project Support**
-  - Compare multiple projects
-  - Merge snapshots
-  - Cross-project search
+    - Compare multiple projects
+    - Merge snapshots
+    - Cross-project search
 
 - [ ] **Collaboration Features**
-  - Share snapshots with team
-  - Real-time collaboration
-  - Comments and annotations
+    - Share snapshots with team
+    - Real-time collaboration
+    - Comments and annotations
 
 - [ ] **Cloud Storage**
-  - Save snapshots online
-  - Sync across devices
-  - Team workspaces
+    - Save snapshots online
+    - Sync across devices
+    - Team workspaces
 
 - [ ] **Advanced Filtering**
-  - Regex patterns
-  - Date-based filtering
-  - Author-based filtering (git blame)
-  - Commit-based filtering
+    - Regex patterns
+    - Date-based filtering
+    - Author-based filtering (git blame)
+    - Commit-based filtering
 
 - [ ] **Performance Improvements**
-  - Streaming processing
-  - Incremental snapshots
-  - Cached results
+    - Streaming processing
+    - Incremental snapshots
+    - Cached results
 
 ---
 
 ## Future Ideas (Backlog) 💡
 
 ### Under Consideration
+
 - Mobile app version
 - Desktop application (Electron)
 - Docker container

@@ -88,28 +88,28 @@ npm run preview
 ### 🎮 使用方法
 
 1. **选择项目文件夹**：
-   - 点击 "Select Project Folder" 按钮，或
-   - 直接拖放项目文件夹到应用窗口
+    - 点击 "Select Project Folder" 按钮，或
+    - 直接拖放项目文件夹到应用窗口
 
 2. **查看过滤结果**：
-   - 应用会自动加载 `.gitignore` 规则
-   - 显示将被包含的文件列表
-   - 实时显示文件数量和大小统计
+    - 应用会自动加载 `.gitignore` 规则
+    - 显示将被包含的文件列表
+    - 实时显示文件数量和大小统计
 
 3. **调整规则（可选）**：
-   - 在文本框中编辑 gitignore 规则
-   - 支持标准 gitignore 语法
-   - 修改后自动重新过滤
+    - 在文本框中编辑 gitignore 规则
+    - 支持标准 gitignore 语法
+    - 修改后自动重新过滤
 
 4. **生成快照**：
-   - 点击 "Generate Snapshot" 按钮
-   - 等待后台处理完成
-   - 查看生成的预览
+    - 点击 "Generate Snapshot" 按钮
+    - 等待后台处理完成
+    - 查看生成的预览
 
 5. **使用快照**：
-   - 点击 "Copy to Clipboard" 复制到剪贴板
-   - 或点击 "Download Snapshot File" 下载为文件
-   - 粘贴到你的 AI 对话中！
+    - 点击 "Copy to Clipboard" 复制到剪贴板
+    - 或点击 "Download Snapshot File" 下载为文件
+    - 粘贴到你的 AI 对话中！
 
 ### 📋 输出格式
 
@@ -250,28 +250,28 @@ npm run preview
 ### 🎮 Usage
 
 1. **Select Project Folder**:
-   - Click "Select Project Folder" button, or
-   - Drag and drop project folder into the app window
+    - Click "Select Project Folder" button, or
+    - Drag and drop project folder into the app window
 
 2. **Review Filtering Results**:
-   - App automatically loads `.gitignore` rules
-   - Displays list of files to be included
-   - Shows real-time file count and size statistics
+    - App automatically loads `.gitignore` rules
+    - Displays list of files to be included
+    - Shows real-time file count and size statistics
 
 3. **Adjust Rules (Optional)**:
-   - Edit gitignore rules in the text box
-   - Supports standard gitignore syntax
-   - Auto-refilters after modifications
+    - Edit gitignore rules in the text box
+    - Supports standard gitignore syntax
+    - Auto-refilters after modifications
 
 4. **Generate Snapshot**:
-   - Click "Generate Snapshot" button
-   - Wait for background processing to complete
-   - Review the generated preview
+    - Click "Generate Snapshot" button
+    - Wait for background processing to complete
+    - Review the generated preview
 
 5. **Use Snapshot**:
-   - Click "Copy to Clipboard" to copy
-   - Or click "Download Snapshot File" to download
-   - Paste into your AI conversation!
+    - Click "Copy to Clipboard" to copy
+    - Or click "Download Snapshot File" to download
+    - Paste into your AI conversation!
 
 ### 📋 Output Format
 

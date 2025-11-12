@@ -35,11 +35,11 @@ When reporting a security issue, please include:
 When using this tool:
 
 1. **Never include sensitive files** - Always ensure your `.gitignore` properly excludes:
-   - API keys and secrets
-   - Environment files (`.env`)
-   - Database credentials
-   - Personal information
-   - Authentication tokens
+    - API keys and secrets
+    - Environment files (`.env`)
+    - Database credentials
+    - Personal information
+    - Authentication tokens
 
 2. **Review before sharing** - Always review the generated snapshot before sharing it with AI services or other parties
 

@@ -3,6 +3,7 @@
 This guide covers different ways to deploy Snapshot With Gitignore.
 
 ## Table of Contents
+
 - [GitHub Pages](#github-pages)
 - [Vercel](#vercel)
 - [Netlify](#netlify)
@@ -20,19 +21,20 @@ The project includes a GitHub Actions workflow that automatically deploys to Git
 #### Setup Steps:
 
 1. **Enable GitHub Pages**
-   - Go to your repository Settings
-   - Navigate to Pages section
-   - Source: Select "GitHub Actions"
+    - Go to your repository Settings
+    - Navigate to Pages section
+    - Source: Select "GitHub Actions"
 
 2. **Push to main branch**
-   ```bash
-   git push origin main
-   ```
+
+    ```bash
+    git push origin main
+    ```
 
 3. **Wait for deployment**
-   - Check the Actions tab
-   - Wait for the CI/CD workflow to complete
-   - Your site will be live at: `https://<username>.github.io/snapshot-with-gitignore/`
+    - Check the Actions tab
+    - Wait for the CI/CD workflow to complete
+    - Your site will be live at: `https://<username>.github.io/snapshot-with-gitignore/`
 
 ### Manual Deployment
 
@@ -56,28 +58,31 @@ gh-pages -d dist
 ### Manual Deployment
 
 1. **Install Vercel CLI**
-   ```bash
-   npm install -g vercel
-   ```
+
+    ```bash
+    npm install -g vercel
+    ```
 
 2. **Deploy**
-   ```bash
-   vercel
-   ```
+
+    ```bash
+    vercel
+    ```
 
 3. **Production Deployment**
-   ```bash
-   vercel --prod
-   ```
+    ```bash
+    vercel --prod
+    ```
 
 ### Configuration
 
 Create `vercel.json`:
+
 ```json
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "framework": "vite"
 }
 ```
 
@@ -92,23 +97,26 @@ Create `vercel.json`:
 ### Manual Deployment
 
 1. **Install Netlify CLI**
-   ```bash
-   npm install -g netlify-cli
-   ```
+
+    ```bash
+    npm install -g netlify-cli
+    ```
 
 2. **Build**
-   ```bash
-   npm run build
-   ```
+
+    ```bash
+    npm run build
+    ```
 
 3. **Deploy**
-   ```bash
-   netlify deploy --prod --dir=dist
-   ```
+    ```bash
+    netlify deploy --prod --dir=dist
+    ```
 
 ### Configuration
 
 Create `netlify.toml`:
+
 ```toml
 [build]
   command = "npm run build"
@@ -127,6 +135,7 @@ Create `netlify.toml`:
 ### Build Docker Image
 
 Create `Dockerfile`:
+
 ```dockerfile
 # Build stage
 FROM node:20-alpine AS builder
@@ -148,6 +157,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ```
 
 Create `nginx.conf`:
+
 ```nginx
 server {
     listen 80;
@@ -179,18 +189,20 @@ docker run -d -p 8080:80 snapshot-with-gitignore
 ### Docker Compose
 
 Create `docker-compose.yml`:
+
 ```yaml
 version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - "8080:80"
-    restart: unless-stopped
+    app:
+        build: .
+        ports:
+            - '8080:80'
+        restart: unless-stopped
 ```
 
 Run:
+
 ```bash
 docker-compose up -d
 ```
@@ -269,31 +281,32 @@ VITE_APP_ENV=production
 ### Before Deployment
 
 1. **Analyze bundle size**
-   ```bash
-   npm run build
-   npx vite-bundle-visualizer
-   ```
+
+    ```bash
+    npm run build
+    npx vite-bundle-visualizer
+    ```
 
 2. **Optimize images**
-   - Compress images
-   - Use WebP format
-   - Add lazy loading
+    - Compress images
+    - Use WebP format
+    - Add lazy loading
 
 3. **Enable caching**
-   - Configure CDN caching
-   - Set appropriate cache headers
+    - Configure CDN caching
+    - Set appropriate cache headers
 
 ### Post-Deployment
 
 1. **Monitor performance**
-   - Use Lighthouse
-   - Check Core Web Vitals
-   - Monitor error rates
+    - Use Lighthouse
+    - Check Core Web Vitals
+    - Monitor error rates
 
 2. **Setup monitoring**
-   - Use Sentry for error tracking
-   - Setup analytics (optional)
-   - Monitor uptime
+    - Use Sentry for error tracking
+    - Setup analytics (optional)
+    - Monitor uptime
 
 ---
 
@@ -302,16 +315,17 @@ VITE_APP_ENV=production
 ### GitHub Pages
 
 1. Add `CNAME` file to `public/` directory:
-   ```
-   yourdomain.com
-   ```
+
+    ```
+    yourdomain.com
+    ```
 
 2. Configure DNS:
-   ```
-   Type: CNAME
-   Name: www
-   Value: <username>.github.io
-   ```
+    ```
+    Type: CNAME
+    Name: www
+    Value: <username>.github.io
+    ```
 
 ### Vercel/Netlify
 
@@ -324,12 +338,14 @@ VITE_APP_ENV=production
 ## SSL/HTTPS
 
 Most platforms provide automatic SSL:
+
 - **GitHub Pages**: Automatic
 - **Vercel**: Automatic
 - **Netlify**: Automatic
 - **Docker**: Use Let's Encrypt + nginx
 
 For custom SSL with Docker:
+
 ```bash
 # Install certbot
 certbot certonly --webroot -w /usr/share/nginx/html -d yourdomain.com
@@ -373,6 +389,7 @@ npm run build
 ## Rollback
 
 ### GitHub Pages
+
 ```bash
 # Revert to previous commit
 git revert HEAD
@@ -380,9 +397,11 @@ git push origin main
 ```
 
 ### Vercel/Netlify
+
 - Use dashboard to rollback to previous deployment
 
 ### Docker
+
 ```bash
 # Tag previous image as latest
 docker tag snapshot-with-gitignore:previous snapshot-with-gitignore:latest
