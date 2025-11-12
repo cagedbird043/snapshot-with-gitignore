@@ -78,4 +78,3 @@ yarn-error.log
 tmp/
 temp/
 *.tmp
-package-lock.json
