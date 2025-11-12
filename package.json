@@ -43,11 +43,11 @@
     },
     "lint-staged": {
         "*.{ts,tsx}": [
-            "eslint --fix",
-            "prettier --write"
+            "eslint --max-warnings 0",
+            "prettier --check"
         ],
         "*.{css,md,json}": [
-            "prettier --write"
+            "prettier --check"
         ]
     },
     "dependencies": {

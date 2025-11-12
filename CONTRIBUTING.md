@@ -75,30 +75,38 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 3. **Set up pre-commit hooks**
 
-    This project uses [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged) to run linting and formatting on staged files before each commit.
+    This project uses [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged) to check code quality on staged files before each commit.
 
     ```bash
     npm run prepare
     ```
 
-    This will set up the pre-commit hooks that automatically:
-    - Run ESLint and fix issues on TypeScript/TSX files
-    - Format code with Prettier on all supported file types
-    - Prevent commits if there are unfixable linting errors
+    This will set up the pre-commit hooks that automatically check:
+    - ESLint issues on TypeScript/TSX files
+    - Code formatting with Prettier on all supported file types
 
-4. **Start the development server**
+    **Important**: If the pre-commit hook fails, it means your code has formatting or linting issues. Run the following commands to fix them:
+
+    ```bash
+    npm run lint:fix    # Fix ESLint issues
+    npm run format      # Format code with Prettier
+    git add .           # Re-stage the fixed files
+    git commit          # Try committing again
+    ```
+
+    The pre-commit hook will **not** automatically fix issues to avoid unexpected changes to your staged files.4. **Start the development server**
 
     ```bash
     npm run dev
     ```
 
-5. **Build for production**
+4. **Build for production**
 
     ```bash
     npm run build
     ```
 
-6. **Run type checking**
+5. **Run type checking**
     ```bash
     npm run type-check
     ```
