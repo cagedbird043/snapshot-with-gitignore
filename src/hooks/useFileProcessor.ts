@@ -56,96 +56,103 @@ type Action =
 
 const reducer = (state: FileProcessorState, action: Action): FileProcessorState => {
   switch (action.type) {
-  case 'ANALYZE_START':
-    return {
-      ...state,
-      phase: 'analyzing',
-      status: action.payload.status,
-      projectName: '',
-      allFiles: [],
-      filteredFiles: [],
-      snapshotContent: '',
-    };
-  case 'FILES_READY':
-    return {
-      ...state,
-      phase: 'analyzing',
-      status: action.payload.status,
-      projectName: action.payload.projectName,
-      allFiles: action.payload.allFiles,
-      gitignores: action.payload.gitignores,
-      filteredFiles: [],
-      snapshotContent: '',
-    };
-  case 'FILTERING_STARTED':
-    return {
-      ...state,
-      phase: 'filtering',
-      status: 'Applying ignore rules in the background...',
-      filteredFiles: [],
-      snapshotContent: '',
-    };
-  case 'FILTERING_COMPLETED':
-    return {
-      ...state,
-      phase: 'ready',
-      status: action.payload.status,
-      filteredFiles: action.payload.filteredFiles,
-    };
-  case 'FILTERING_FAILED':
-    return {
-      ...state,
-      phase: 'error',
-      status: action.payload.status,
-    };
-  case 'GITIGNORE_EDIT': {
-    const nextGitignores = state.gitignores.map(entry =>
-      entry.path === action.payload.path ? { ...entry, content: action.payload.content } : entry
-    );
-    return {
-      ...state,
-      phase: 'analyzing',
-      status: state.filteredFiles.length
-        ? 'Updating ignore rules... Reapplying filters.'
-        : 'Updating ignore rules...',
-      gitignores: nextGitignores,
-      snapshotContent: '',
-    };
-  }
-  case 'SNAPSHOT_STARTED':
-    return {
-      ...state,
-      phase: 'generating',
-      status: 'Starting snapshot generation in the background...',
-      snapshotContent: '',
-    };
-  case 'SNAPSHOT_STATUS':
-    return {
-      ...state,
-      status: action.payload.status,
-    };
-  case 'SNAPSHOT_COMPLETED':
-    return {
-      ...state,
-      phase: 'ready',
-      status: action.payload.status,
-      snapshotContent: action.payload.content,
-    };
-  case 'SNAPSHOT_FAILED':
-    return {
-      ...state,
-      phase: 'error',
-      status: action.payload.status,
-    };
-  case 'SET_STATUS':
-    return {
-      ...state,
-      status: action.payload.status,
-    };
-  case 'RESET':
-    return createInitialState();
-  default:
-    return state;
+    case 'ANALYZE_START':
+      return {
+        ...state,
+        phase: 'analyzing',
+        status: action.payload.status,
+        projectName: '',
+        allFiles: [],
+        filteredFiles: [],
+        snapshotContent: '',
+      };
+    case 'FILES_READY':
+      return {
+        ...state,
+        phase: 'analyzing',
+        status: action.payload.status,
+        projectName: action.payload.projectName,
+        allFiles: action.payload.allFiles,
+        gitignores: action.payload.gitignores,
+        filteredFiles: [],
+        snapshotContent: '',
+      };
+    case 'FILTERING_STARTED':
+      return {
+        ...state,
+        phase: 'filtering',
+        status: 'Applying ignore rules in the background...',
+        filteredFiles: [],
+        snapshotContent: '',
+      };
+    case 'FILTERING_COMPLETED':
+      return {
+        ...state,
+        phase: 'ready',
+        status: action.payload.status,
+        filteredFiles: action.payload.filteredFiles,
+      };
+    case 'FILTERING_FAILED':
+      return {
+        ...state,
+        phase: 'error',
+        status: action.payload.status,
+      };
+    case 'GITIGNORE_EDIT': {
+      const nextGitignores = state.gitignores.map(entry =>
+        entry.path === action.payload.path ? { ...entry, content: action.payload.content } : entry
+      );
+      if (state.allFiles.length > 0) {
+        return {
+          ...state,
+          phase: 'analyzing',
+          status: state.filteredFiles.length
+            ? 'Updating ignore rules... Reapplying filters.'
+            : 'Updating ignore rules...',
+          gitignores: nextGitignores,
+          snapshotContent: '',
+        };
+      } else {
+        return {
+          ...state,
+          gitignores: nextGitignores,
+        };
+      }
+    }
+    case 'SNAPSHOT_STARTED':
+      return {
+        ...state,
+        phase: 'generating',
+        status: 'Starting snapshot generation in the background...',
+        snapshotContent: '',
+      };
+    case 'SNAPSHOT_STATUS':
+      return {
+        ...state,
+        status: action.payload.status,
+      };
+    case 'SNAPSHOT_COMPLETED':
+      return {
+        ...state,
+        phase: 'ready',
+        status: action.payload.status,
+        snapshotContent: action.payload.content,
+      };
+    case 'SNAPSHOT_FAILED':
+      return {
+        ...state,
+        phase: 'error',
+        status: action.payload.status,
+      };
+    case 'SET_STATUS':
+      return {
+        ...state,
+        status: action.payload.status,
+      };
+    case 'RESET':
+      return createInitialState();
+    default:
+      return state;
   }
 };
 
@@ -238,14 +245,14 @@ export const useFileProcessor = () => {
 
     const loadedGitignores: GitignoreFile[] = gitignoreFiles.length
       ? await Promise.all(
-        gitignoreFiles.map(async file => ({
-          path: file.webkitRelativePath,
-          content: await file.text().catch(error => {
-            console.error(`Error reading .gitignore: ${file.webkitRelativePath}`, error);
-            return '';
-          }),
-        }))
-      )
+          gitignoreFiles.map(async file => ({
+            path: file.webkitRelativePath,
+            content: await file.text().catch(error => {
+              console.error(`Error reading .gitignore: ${file.webkitRelativePath}`, error);
+              return '';
+            }),
+          }))
+        )
       : [createDefaultGitignore()];
 
     loadedGitignores.sort((a, b) => a.path.localeCompare(b.path));
