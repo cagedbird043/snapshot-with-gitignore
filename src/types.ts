@@ -13,7 +13,7 @@ export interface FilteredFile {
 export interface FilterWorkerRequest {
   type: 'FILTER_FILES';
   payload: {
-    allFiles: File[];
+    allFiles: Array<{ webkitRelativePath: string; size: number; file: File }>;
     gitignores: GitignoreFile[];
     projectName: string;
   };

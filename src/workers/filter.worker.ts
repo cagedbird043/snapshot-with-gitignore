@@ -39,10 +39,15 @@ ctx.onmessage = (event: MessageEvent<FilterWorkerInboundMessage>) => {
     const gitignoreMap = buildGitignoreMap(message.payload.gitignores, message.payload.projectName);
 
     const filteredFiles: FilteredFile[] = message.payload.allFiles
-      .filter(file =>
-        isFileAllowed(file, message.payload.gitignores, message.payload.projectName, gitignoreMap)
+      .filter(item =>
+        isFileAllowed(
+          item.file,
+          message.payload.gitignores,
+          message.payload.projectName,
+          gitignoreMap
+        )
       )
-      .map(file => ({ webkitRelativePath: file.webkitRelativePath, size: file.size }));
+      .map(item => ({ webkitRelativePath: item.webkitRelativePath, size: item.size }));
 
     const response: FilterWorkerOutboundMessage = {
       type: 'FILTER_RESULT',

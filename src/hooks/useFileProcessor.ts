@@ -216,7 +216,11 @@ export const useFileProcessor = () => {
     const request: FilterWorkerInboundMessage = {
       type: 'FILTER_FILES',
       payload: {
-        allFiles: state.allFiles,
+        allFiles: state.allFiles.map(file => ({
+          webkitRelativePath: file.webkitRelativePath,
+          size: file.size,
+          file,
+        })),
         gitignores: state.gitignores,
         projectName: state.projectName,
       },
