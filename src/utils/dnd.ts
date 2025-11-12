@@ -48,8 +48,11 @@ const traverseDirectory = async (
         const relativePath = entry.fullPath.startsWith('/')
           ? entry.fullPath.substring(1)
           : entry.fullPath;
+        const finalPath =
+          (relativePath || entry.name || `unnamed-${Date.now()}-${Math.random()}`).trim() ||
+          `file-${Date.now()}-${Math.random()}`;
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: relativePath || entry.name,
+          value: finalPath,
         });
         accumulator.push(file);
       } catch (error) {
@@ -85,8 +88,11 @@ export const extractFilesFromDataTransferItems = async (
         const relativePath = entry.fullPath.startsWith('/')
           ? entry.fullPath.substring(1)
           : entry.fullPath;
+        const finalPath =
+          (relativePath || entry.name || `unnamed-${Date.now()}-${Math.random()}`).trim() ||
+          `file-${Date.now()}-${Math.random()}`;
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: relativePath || entry.name,
+          value: finalPath,
         });
         droppedFiles.push(file);
       } catch (error) {

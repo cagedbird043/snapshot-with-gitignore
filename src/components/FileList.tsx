@@ -21,8 +21,8 @@ const FileListComponent = ({ files }: FileListProps) => {
     <section className={styles.container}>
       <h2>Files to be Included ({files.length})</h2>
       <ul className={styles.fileList}>
-        {visibleFiles.map(file => (
-          <li key={file.webkitRelativePath}>
+        {visibleFiles.map((file, index) => (
+          <li key={`${file.webkitRelativePath}-${file.size}-${index}`}>
             <span className={styles.fileSize}>{formatFileSize(file.size)}</span>
             {file.webkitRelativePath}
           </li>

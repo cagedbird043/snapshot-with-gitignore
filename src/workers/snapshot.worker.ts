@@ -41,9 +41,6 @@ ctx.onmessage = async (event: MessageEvent<SnapshotWorkerInboundMessage>) => {
     for (const file of sortedFiles) {
       try {
         const content = await file.text();
-        console.log(
-          `Reading file: ${file.webkitRelativePath}, size: ${file.size}, content length: ${content.length}`
-        );
         const lang = getLanguageFromExtension(file.name);
         snapshotContent += '```' + `${lang}:${file.webkitRelativePath}` + '\n';
         snapshotContent += content;
