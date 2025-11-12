@@ -73,19 +73,32 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up pre-commit hooks**
+
+   This project uses [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged) to run linting and formatting on staged files before each commit.
+
+   ```bash
+   npm run prepare
+   ```
+
+   This will set up the pre-commit hooks that automatically:
+   - Run ESLint and fix issues on TypeScript/TSX files
+   - Format code with Prettier on all supported file types
+   - Prevent commits if there are unfixable linting errors
+
+4. **Start the development server**
 
    ```bash
    npm run dev
    ```
 
-4. **Build for production**
+5. **Build for production**
 
    ```bash
    npm run build
    ```
 
-5. **Run type checking**
+6. **Run type checking**
    ```bash
    npm run type-check
    ```
@@ -129,7 +142,7 @@ interface FileMetadata {
 }
 
 function processFiles(files: File[]): FileMetadata[] {
-  return files.map((file) => ({
+  return files.map(file => ({
     path: file.webkitRelativePath,
     size: file.size,
   }));
