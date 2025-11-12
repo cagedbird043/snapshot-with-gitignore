@@ -41,12 +41,16 @@ ctx.onmessage = async (event: MessageEvent<SnapshotWorkerInboundMessage>) => {
     for (const file of sortedFiles) {
       try {
         const content = await file.text();
+        console.log(
+          `Reading file: ${file.webkitRelativePath}, size: ${file.size}, content length: ${content.length}`
+        );
         const lang = getLanguageFromExtension(file.name);
         snapshotContent += '```' + `${lang}:${file.webkitRelativePath}` + '\n';
         snapshotContent += content;
         snapshotContent += '\n```\n\n';
       } catch (error) {
         const messageText = error instanceof Error ? error.message : 'Unknown read error';
+        console.error(`Error reading file ${file.webkitRelativePath}:`, error);
         snapshotContent += '```' + `error:Could not read ${file.webkitRelativePath}` + '\n';
         snapshotContent += `Error: ${messageText}\n`;
         snapshotContent += '```\n\n';

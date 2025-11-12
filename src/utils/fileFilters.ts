@@ -113,7 +113,7 @@ export const isFileAllowed = (
   // 懒加载 gitignoreMap（只在需要时构建）
   const map = gitignoreMap || buildGitignoreMap(gitignores, projectName);
 
-  const projectRelativePath = projectName
+  const projectRelativePath = file.webkitRelativePath.startsWith(`${projectName}/`)
     ? file.webkitRelativePath.substring(projectName.length + 1)
     : file.webkitRelativePath;
 

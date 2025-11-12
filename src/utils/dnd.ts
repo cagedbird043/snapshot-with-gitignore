@@ -46,7 +46,7 @@ const traverseDirectory = async (
       try {
         const file = await getFileFromEntry(entry);
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: entry.fullPath.substring(1),
+          value: entry.fullPath.startsWith('/') ? entry.fullPath.substring(1) : entry.fullPath,
         });
         accumulator.push(file);
       } catch (error) {
@@ -80,7 +80,7 @@ export const extractFilesFromDataTransferItems = async (
       try {
         const file = await getFileFromEntry(entry);
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: entry.fullPath.substring(1),
+          value: entry.fullPath.startsWith('/') ? entry.fullPath.substring(1) : entry.fullPath,
         });
         droppedFiles.push(file);
       } catch (error) {

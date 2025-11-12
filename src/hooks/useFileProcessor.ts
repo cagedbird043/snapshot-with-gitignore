@@ -239,7 +239,7 @@ export const useFileProcessor = () => {
     dispatch({ type: 'ANALYZE_START', payload: { status: 'Analyzing folder structure...' } });
 
     const firstPath = files[0].webkitRelativePath;
-    const projectName = firstPath ? (firstPath.split('/')[0] ?? '') : '';
+    const projectName = firstPath ? (firstPath.split('/')[0] ?? 'project') : 'project';
 
     const gitignoreFiles = files.filter(file => file.name === '.gitignore');
 
