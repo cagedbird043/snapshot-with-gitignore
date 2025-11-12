@@ -45,8 +45,11 @@ const traverseDirectory = async (
     } else if (isFileEntry(entry)) {
       try {
         const file = await getFileFromEntry(entry);
+        const relativePath = entry.fullPath.startsWith('/')
+          ? entry.fullPath.substring(1)
+          : entry.fullPath;
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: entry.fullPath.startsWith('/') ? entry.fullPath.substring(1) : entry.fullPath,
+          value: relativePath || entry.name,
         });
         accumulator.push(file);
       } catch (error) {
@@ -79,8 +82,11 @@ export const extractFilesFromDataTransferItems = async (
     } else if (isFileEntry(entry)) {
       try {
         const file = await getFileFromEntry(entry);
+        const relativePath = entry.fullPath.startsWith('/')
+          ? entry.fullPath.substring(1)
+          : entry.fullPath;
         Object.defineProperty(file, 'webkitRelativePath', {
-          value: entry.fullPath.startsWith('/') ? entry.fullPath.substring(1) : entry.fullPath,
+          value: relativePath || entry.name,
         });
         droppedFiles.push(file);
       } catch (error) {
