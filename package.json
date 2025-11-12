@@ -38,7 +38,17 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write \"**/*.{ts,tsx,css,md,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,css,md,json}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,css,md,json}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@google/genai": "^0.7.0",
@@ -55,6 +65,8 @@
     "eslint": "^8.0.0",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "prettier": "^3.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0",
