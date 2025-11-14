@@ -1,4 +1,5 @@
 import { MutableRefObject, useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import { produce } from 'immer';
 import {
     FilterWorkerInboundMessage,
     FilterWorkerOutboundMessage,
@@ -54,109 +55,73 @@ type Action =
     | { type: 'SET_STATUS'; payload: { status: string } }
     | { type: 'RESET' };
 
-const reducer = (state: FileProcessorState, action: Action): FileProcessorState => {
-    switch (action.type) {
-        case 'ANALYZE_START':
-            return {
-                ...state,
-                phase: 'analyzing',
-                status: action.payload.status,
-                projectName: '',
-                allFiles: [],
-                filteredFiles: [],
-                snapshotContent: '',
-            };
-        case 'FILES_READY':
-            return {
-                ...state,
-                phase: 'analyzing',
-                status: action.payload.status,
-                projectName: action.payload.projectName,
-                allFiles: action.payload.allFiles,
-                gitignores: action.payload.gitignores,
-                filteredFiles: [],
-                snapshotContent: '',
-            };
-        case 'FILTERING_STARTED':
-            return {
-                ...state,
-                phase: 'filtering',
-                status: 'Applying ignore rules in the background...',
-                filteredFiles: [],
-                snapshotContent: '',
-            };
-        case 'FILTERING_COMPLETED':
-            return {
-                ...state,
-                phase: 'ready',
-                status: action.payload.status,
-                filteredFiles: action.payload.filteredFiles,
-            };
-        case 'FILTERING_FAILED':
-            return {
-                ...state,
-                phase: 'error',
-                status: action.payload.status,
-            };
-        case 'GITIGNORE_EDIT': {
-            const nextGitignores = state.gitignores.map(entry =>
-                entry.path === action.payload.path
-                    ? { ...entry, content: action.payload.content }
-                    : entry
-            );
-            if (state.allFiles.length > 0) {
-                return {
-                    ...state,
-                    phase: 'analyzing',
-                    status: state.filteredFiles.length
-                        ? 'Updating ignore rules... Reapplying filters.'
-                        : 'Updating ignore rules...',
-                    gitignores: nextGitignores,
-                    snapshotContent: '',
-                };
-            } else {
-                return {
-                    ...state,
-                    gitignores: nextGitignores,
-                };
+const reducer = (state: FileProcessorState, action: Action): FileProcessorState =>
+    produce(state, draft => {
+        switch (action.type) {
+            case 'ANALYZE_START':
+                draft.phase = 'analyzing';
+                draft.status = action.payload.status;
+                draft.projectName = '';
+                draft.allFiles = [];
+                draft.filteredFiles = [];
+                draft.snapshotContent = '';
+                break;
+            case 'FILES_READY':
+                draft.phase = 'analyzing';
+                draft.status = action.payload.status;
+                draft.projectName = action.payload.projectName;
+                draft.allFiles = action.payload.allFiles;
+                draft.gitignores = action.payload.gitignores;
+                draft.filteredFiles = [];
+                draft.snapshotContent = '';
+                break;
+            case 'FILTERING_STARTED':
+                draft.phase = 'filtering';
+                draft.status = 'Applying ignore rules in the background...';
+                draft.filteredFiles = [];
+                draft.snapshotContent = '';
+                break;
+            case 'FILTERING_COMPLETED':
+                draft.phase = 'ready';
+                draft.status = action.payload.status;
+                draft.filteredFiles = action.payload.filteredFiles;
+                break;
+            case 'FILTERING_FAILED':
+                draft.phase = 'error';
+                draft.status = action.payload.status;
+                break;
+            case 'GITIGNORE_EDIT': {
+                const entry = draft.gitignores.find(e => e.path === action.payload.path);
+                if (entry) {
+                    entry.content = action.payload.content;
+                }
+                draft.snapshotContent = ''; // Clear snapshot when rules change
+                break;
             }
+            case 'SNAPSHOT_STARTED':
+                draft.phase = 'generating';
+                draft.status = 'Starting snapshot generation in the background...';
+                draft.snapshotContent = '';
+                break;
+            case 'SNAPSHOT_STATUS':
+                draft.status = action.payload.status;
+                break;
+            case 'SNAPSHOT_COMPLETED':
+                draft.phase = 'ready';
+                draft.status = action.payload.status;
+                draft.snapshotContent = action.payload.content;
+                break;
+            case 'SNAPSHOT_FAILED':
+                draft.phase = 'error';
+                draft.status = action.payload.status;
+                break;
+            case 'SET_STATUS':
+                draft.status = action.payload.status;
+                break;
+            case 'RESET':
+                return createInitialState();
         }
-        case 'SNAPSHOT_STARTED':
-            return {
-                ...state,
-                phase: 'generating',
-                status: 'Starting snapshot generation in the background...',
-                snapshotContent: '',
-            };
-        case 'SNAPSHOT_STATUS':
-            return {
-                ...state,
-                status: action.payload.status,
-            };
-        case 'SNAPSHOT_COMPLETED':
-            return {
-                ...state,
-                phase: 'ready',
-                status: action.payload.status,
-                snapshotContent: action.payload.content,
-            };
-        case 'SNAPSHOT_FAILED':
-            return {
-                ...state,
-                phase: 'error',
-                status: action.payload.status,
-            };
-        case 'SET_STATUS':
-            return {
-                ...state,
-                status: action.payload.status,
-            };
-        case 'RESET':
-            return createInitialState();
-        default:
-            return state;
-    }
-};
+    });
 
 const terminateWorker = (workerRef: MutableRefObject<Worker | null>) => {
     if (workerRef.current) {

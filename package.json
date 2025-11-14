@@ -53,6 +53,7 @@
     },
     "dependencies": {
         "@google/genai": "^0.7.0",
+        "immer": "^10.2.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },

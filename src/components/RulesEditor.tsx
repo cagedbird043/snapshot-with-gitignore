@@ -9,16 +9,14 @@ interface RulesEditorProps {
 }
 
 const RulesEditorComponent = ({ rules, isDisabled, onChange }: RulesEditorProps) => {
-    const debounceRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+    const textareaRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
-    const debouncedOnChange = useCallback(
-        (path: string, content: string) => {
-            if (debounceRef.current[path]) {
-                clearTimeout(debounceRef.current[path]);
+    const handleBlur = useCallback(
+        (path: string) => {
+            const textarea = textareaRefs.current[path];
+            if (textarea) {
+                onChange(path, textarea.value);
             }
-            debounceRef.current[path] = setTimeout(() => {
-                onChange(path, content);
-            }, 300); // 300ms debounce
         },
         [onChange]
     );
@@ -31,10 +29,13 @@ const RulesEditorComponent = ({ rules, isDisabled, onChange }: RulesEditorProps)
                         Rules from: <strong>{gitignore.path}</strong>
                     </label>
                     <textarea
+                        ref={el => {
+                            textareaRefs.current[gitignore.path] = el;
+                        }}
                         id={`gitignore-${index}`}
                         className={styles.textareaInput}
                         defaultValue={gitignore.content}
-                        onChange={event => debouncedOnChange(gitignore.path, event.target.value)}
+                        onBlur={() => handleBlur(gitignore.path)}
                         placeholder={'e.g. build/\n*.log\nsecrets.txt'}
                         disabled={isDisabled}
                         rows={6}
